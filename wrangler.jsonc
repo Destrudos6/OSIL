@@ -4,6 +4,10 @@
 	"compatibility_flags": ["global_fetch_strictly_public"],
 	"name": "osil-site",
 	"main": "@astrojs/cloudflare/entrypoints/server",
+	"routes": [
+		{ "pattern": "osil.cn", "custom_domain": true },
+		{ "pattern": "www.osil.cn", "custom_domain": true }
+	],
 	"assets": {
 		"directory": "./dist",
 		"binding": "ASSETS"
