@@ -5,12 +5,18 @@
   "scripts": {
     "dev": "astro dev --host",
     "build": "astro build",
-    "preview": "astro preview --host"
+    "preview": "npm run build && wrangler dev",
+    "generate-types": "wrangler types",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^14.4.3",
     "astro": "~7.4.4"
   },
   "allowScripts": {
     "sharp@0.35.5": true
+  },
+  "devDependencies": {
+    "wrangler": "^4.156.0"
   }
 }
