@@ -1,0 +1,55 @@
+---
+import Button from '../ui/Button.astro';
+import Console from '../console/Console.astro';
+import { hero } from '../../data/home';
+---
+<section class="hero"><div class="w">
+  <div class="pill rv"><span>{hero.pill.tag}</span>{hero.pill.text}</div>
+  <h1 class="serif rv" set:html={hero.title} />
+  <div class="subrow">
+    <p class="lead rv">{hero.lead}</p>
+    <a class="more rv" href={hero.more.href}><b>{hero.more.tag}</b>{hero.more.label}<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+  </div>
+  <div class="cta rv">
+    <Button href={hero.primary.href} arrow>{hero.primary.label}</Button>
+    <Button href={hero.secondary.href} variant="light">{hero.secondary.label}</Button>
+  </div>
+  <div class="stage rv">
+    <Console />
+    <p class="note">{hero.note}</p>
+  </div>
+</div></section>
+<style>
+/* Linear 风格：左对齐大标题 + 全宽产品截图 */
+.hero{padding:110px 0 0;text-align:left}
+h1{font-size:clamp(44px,6.2vw,78px);line-height:1.04;margin:26px 0 0;max-width:860px;letter-spacing:-.035em;text-wrap:balance}
+h1 :global(b){display:inline-block}
+.lead{max-width:600px;margin:0;font-size:16.5px;color:var(--muted);text-wrap:pretty}
+.subrow{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;margin-top:24px}
+.more{display:inline-flex;align-items:center;gap:7px;font-size:14px;color:var(--muted);transition:color .2s;white-space:nowrap}
+.more b{color:var(--fg);font-weight:600}
+.more:hover{color:var(--fg)}
+.more svg{width:13px;height:13px;transition:transform .2s}
+.more:hover svg{transform:translateX(2px)}
+.cta{display:flex;gap:10px;justify-content:flex-start;margin-top:34px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:5px 12px 5px 6px;border:1px solid var(--line);border-radius:999px;background:var(--card);font-size:12.5px;color:var(--fg2);box-shadow:var(--shadow)}
+.pill span{background:var(--blue);color:#fff;border-radius:999px;padding:1px 8px;font-size:11px;font-weight:600}
+.stage{position:relative;margin:64px 0 0}
+.stage:before{content:"";position:absolute;inset:-40px -60px auto;height:70%;background:radial-gradient(60% 60% at 50% 40%,color-mix(in srgb,var(--blue) 16%,transparent),transparent 70%);filter:blur(20px);z-index:-1}
+.note{font-size:11.5px;color:var(--muted);margin-top:14px}
+@media (max-width:640px){.hero{padding-top:84px}}
+/* 入场动画：Linear 式渐现 —— 从“水下”上浮、去模糊、错峰浮现 */
+.hero .rv{filter:blur(14px);transform:translateY(26px);
+  transition:opacity 1.3s cubic-bezier(.22,1,.36,1),transform 1.3s cubic-bezier(.22,1,.36,1),filter 1.3s cubic-bezier(.22,1,.36,1)}
+.hero .rv.in{filter:blur(0);transform:none}
+/* 依次错峰：胶囊 → 标题 → 导语 → 按钮 → 控制台 */
+.pill.rv{transition-delay:.05s}
+h1.rv{transition-delay:.16s}
+.lead.rv{transition-delay:.3s}
+.cta.rv{transition-delay:.44s}
+/* 控制台体量大，模糊起点浅一点，避免大面积模糊白茫一片 */
+.stage.rv{transition-delay:.58s;filter:blur(7px)}
+@media (prefers-reduced-motion:reduce){
+  .hero .rv{filter:none;transform:none;transition:none}
+}
+</style>

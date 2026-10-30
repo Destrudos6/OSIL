@@ -1,0 +1,26 @@
+---
+// Linear 式区块头：左侧大标题，右侧描述（+ 可选“了解更多 →”链接）
+import Eyebrow from './Eyebrow.astro';
+interface Props { eyebrow?: string; title: string; desc?: string; more?: { label: string; href: string }; titleMax?: string }
+const { eyebrow, title, desc, more, titleMax } = Astro.props;
+---
+<div class="fhead rv">
+  <div class="l">
+    {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+    <h2 class="h2 serif" style={titleMax ? `max-width:${titleMax}` : undefined} set:html={title} />
+  </div>
+  <div class="r">
+    {desc && <p>{desc}</p>}
+    {more && <a class="more" href={more.href}>{more.label}<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>}
+  </div>
+</div>
+<style>
+.fhead{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center}
+.l :global(.eyebrow) + h2{margin-top:14px}
+.r p{font-size:15px;color:var(--muted);line-height:1.75;max-width:440px;text-wrap:pretty}
+.more{display:inline-flex;align-items:center;gap:7px;margin-top:22px;font-size:14px;font-weight:500;color:var(--fg2);transition:color .2s}
+.more:hover{color:var(--fg)}
+.more svg{width:14px;height:14px;transition:transform .2s}
+.more:hover svg{transform:translateX(2px)}
+@media (max-width:960px){.fhead{grid-template-columns:1fr;gap:20px}}
+</style>

@@ -1,0 +1,45 @@
+---
+import Section from '../ui/Section.astro';
+import FeatureHead from '../ui/FeatureHead.astro';
+import RuntimeArt from '../art/RuntimeArt.astro';
+import AppliedArt from '../art/AppliedArt.astro';
+import TrustArt from '../art/TrustArt.astro';
+import { directions as d } from '../../data/home';
+// 新增方向：画一个 art 组件，在这里登记，再到 data/home.ts 加一项
+const arts = { runtime: RuntimeArt, applied: AppliedArt, trust: TrustArt };
+---
+<Section id="directions" top={0}>
+  <FeatureHead eyebrow={d.eyebrow} title={d.title} desc={d.sub} />
+  {/* Linear 式 FIG 开放三列：细线分隔 + mono 编号，不用卡片盒 */}
+  <div class="figs">
+    {d.items.map((it, i) => { const Art = arts[it.art]; return (
+      <article class="fig rv">
+        <span class="figno">FIG 0.{i + 1}</span>
+        <div class="art"><Art /></div>
+        <h3>{it.title}</h3>
+        <p>{it.desc}</p>
+        <span class="tag">{it.tag}</span>
+      </article>
+    ); })}
+  </div>
+</Section>
+<style>
+.figs{display:grid;grid-template-columns:repeat(3,1fr);margin-top:72px}
+.fig{padding:0 36px;display:flex;flex-direction:column}
+.fig:first-child{padding-left:0}
+.fig:last-child{padding-right:0}
+.fig + .fig{border-left:1px solid var(--line)}
+.figno{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--muted)}
+.art{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;margin:16px 0 28px}
+.art :global(svg){width:100%;height:100%}
+h3{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.fig p{font-size:14px;color:var(--muted);line-height:1.65;margin-top:8px}
+.tag{margin-top:auto;padding-top:18px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--muted)}
+@media (max-width:960px){
+  .figs{grid-template-columns:1fr;gap:0}
+  .fig{padding:44px 0}
+  .fig:first-child{padding-top:0}
+  .fig:last-child{padding-bottom:0}
+  .fig + .fig{border-left:0;border-top:1px solid var(--line)}
+}
+</style>

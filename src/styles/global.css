@@ -1,0 +1,21 @@
+/* 全站通用样式：重置、排版、容器、进场动画 */
+@import './tokens.css';
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.w{max-width:var(--container);margin:0 auto;padding:0 24px}
+/* Linear 风格：展示层统一无衬线 + 紧字距（.serif 类名保留以兼容既有标记） */
+.serif{font-family:var(--sans);font-weight:600;letter-spacing:-.03em}
+.serif b,.serif em{font-weight:700;font-style:normal;letter-spacing:-.035em}
+.muted{color:var(--muted)}
+section{padding:130px 0}
+.h2{font-size:clamp(30px,4.2vw,46px);line-height:1.12;text-wrap:balance}
+.sub{color:var(--muted);font-size:15.5px;max-width:560px;margin-top:16px;text-wrap:pretty}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+@keyframes pulse{50%{box-shadow:0 0 0 6px transparent}}
+@keyframes blink{50%{opacity:.2}}
+@media (max-width:640px){section{padding:90px 0}}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}

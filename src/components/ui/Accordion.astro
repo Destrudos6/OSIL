@@ -1,0 +1,30 @@
+---
+// 折叠问答项，open 默认展开
+interface Props { q: string; a: string; open?: boolean }
+const { q, a, open = false } = Astro.props;
+---
+<div class:list={['qa', { open }]}>
+  <button type="button" aria-expanded={open ? 'true' : 'false'}>{q}<i></i></button>
+  <div class="a"><div><p>{a}</p></div></div>
+</div>
+<style>
+.qa{border-top:1px solid var(--line)}
+.qa:last-child{border-bottom:1px solid var(--line)}
+button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 0;text-align:left;font-size:16.5px;font-weight:500;letter-spacing:-.01em}
+i{width:22px;height:22px;flex:none;position:relative}
+i:before,i:after{content:"";position:absolute;left:5px;right:5px;top:10px;height:1.5px;background:var(--fg);transition:.25s}
+i:after{transform:rotate(90deg)}
+.open i:after{transform:rotate(0)}
+.a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s}
+.open .a{grid-template-rows:1fr}
+.a>div{overflow:hidden}
+p{font-size:14.5px;color:var(--muted);padding:0 40px 22px 0;max-width:620px}
+</style>
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.qa > button').forEach((b) => {
+    b.addEventListener('click', () => {
+      const open = b.parentElement!.classList.toggle('open');
+      b.setAttribute('aria-expanded', String(open));
+    });
+  });
+</script>

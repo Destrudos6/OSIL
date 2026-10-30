@@ -1,0 +1,11 @@
+---
+// 分段选择器（展示用）
+interface Props { options: string[]; active?: number }
+const { options, active = 0 } = Astro.props;
+---
+<div class="seg">{options.map((o, i) => <span class:list={{ on: i === active }}>{o}</span>)}</div>
+<style>
+.seg{display:flex;gap:2px;font-size:10.5px}
+span{padding:2px 7px;border-radius:5px;color:var(--muted)}
+span.on{background:color-mix(in srgb,var(--fg) 7%,transparent);color:var(--fg);font-weight:500}
+</style>

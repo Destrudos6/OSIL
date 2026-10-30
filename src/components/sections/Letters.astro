@@ -1,0 +1,24 @@
+---
+import Section from '../ui/Section.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import { letters as l } from '../../data/home';
+---
+<Section top={40}>
+  <SectionHeading eyebrow={l.eyebrow} title={l.title} />
+  <div class="letters rv">
+    {l.items.map((it) => <div><strong>{it.letter}</strong><em>{it.word}</em><span>{it.desc}</span></div>)}
+  </div>
+</Section>
+<style>
+.letters{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-top:48px;background:var(--card)}
+.letters div{padding:28px 24px 26px;border-left:1px solid var(--line)}
+.letters div:first-child{border-left:0}
+strong{font-family:var(--sans);font-weight:500;font-size:58px;line-height:1;display:block;letter-spacing:-.04em}
+em{font-style:normal;font-weight:600;font-size:14.5px;display:block;margin-top:16px}
+span{font-size:13.5px;color:var(--muted)}
+@media (max-width:960px){
+  .letters{grid-template-columns:repeat(2,1fr)}
+  .letters div:nth-child(3){border-left:0}
+  .letters div:nth-child(n+3){border-top:1px solid var(--line)}
+}
+</style>

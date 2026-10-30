@@ -1,0 +1,38 @@
+---
+import Mark from '../ui/Mark.astro';
+interface Props {
+  agents: readonly { name: string; status: string }[];
+  brand: string;
+  menu: readonly { icon: string; label: string }[];
+  agentsHeading: string;
+  status: { all: string; updated: string };
+}
+const { agents, brand, menu, agentsHeading, status } = Astro.props;
+// menu.icon 对应这里的 SVG；文字统一来自 data/home.ts 的 consoleDemo.menu
+const icons: Record<string, string> = {
+  grid: '<rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/>',
+  list: '<path d="M2 4h12M2 8h12M2 12h8"/>',
+  clock: '<circle cx="8" cy="8" r="5.5"/><path d="M8 5v3l2 1.5"/>',
+};
+---
+<aside class="side">
+  <div class="b"><Mark />{brand}</div>
+  {menu.map((m, i) => <a class:list={[{ on: i === 0 }]}><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" set:html={icons[m.icon] ?? icons.grid} />{m.label}</a>)}
+  <div class="h">{agentsHeading}</div>
+  {agents.map((a) => <a>{a.name}<span class:list={['d', { y: a.status === 'busy' }]}></span></a>)}
+  <div class="st"><b>{status.all}</b><span class="muted">{status.updated}</span></div>
+</aside>
+<style>
+.side{border-right:1px solid var(--line);background:var(--bg-soft);padding:14px 10px;display:flex;flex-direction:column;gap:2px;font-size:12.5px}
+.b{display:flex;align-items:center;gap:8px;font-weight:600;font-size:14px;padding:4px 8px 14px}
+.h{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:12px 8px 6px;font-weight:500}
+a{display:flex;align-items:center;gap:9px;padding:6px 8px;border-radius:7px;color:var(--fg2)}
+a.on{background:var(--card);box-shadow:var(--shadow);color:var(--fg);font-weight:500}
+.d{width:6px;height:6px;border-radius:50%;background:var(--green);margin-left:auto}
+.d.y{background:var(--amber)}
+svg{width:14px;height:14px;opacity:.7}
+.st{margin-top:auto;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:10px;font-size:11px}
+.st b{display:flex;align-items:center;gap:6px;font-weight:500;font-size:11.5px}
+.st b:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px color-mix(in srgb,var(--green) 22%,transparent);animation:pulse 2s infinite}
+@media (max-width:960px){.side{display:none}}
+</style>

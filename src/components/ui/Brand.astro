@@ -1,0 +1,10 @@
+---
+import Mark from './Mark.astro';
+import { site } from '../../data/site';
+interface Props { href?: string; label?: string }
+const { href = '#', label = site.name } = Astro.props;
+---
+<a class="brand" href={href}><Mark />{label}</a>
+<style>
+.brand{display:flex;align-items:center;gap:9px;font-weight:600;font-size:16.5px;letter-spacing:-.02em;color:var(--fg)}
+</style>

@@ -1,0 +1,18 @@
+---
+import Brand from '../ui/Brand.astro';
+import { site, footer } from '../../data/site';
+---
+<footer><div class="w">
+  <div><Brand /><p class="muted intro">{site.fullName}<br>{site.slogan}</p></div>
+  {footer.map((col) => <div><h5>{col.title}</h5>{col.links.map((l) => <a href={l.href}>{l.label}</a>)}</div>)}
+  <div class="cp"><span>{site.copyright}</span><span>{site.domain}</span></div>
+</div></footer>
+<style>
+footer{border-top:1px solid var(--line);padding:48px 0 36px;font-size:13px}
+.w{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px}
+.intro{margin-top:12px;max-width:280px}
+h5{font-size:13px;font-weight:600;margin-bottom:12px}
+a{display:block;color:var(--muted);padding:3px 0}a:hover{color:var(--fg)}
+.cp{grid-column:1/-1;border-top:1px solid var(--line);padding-top:22px;margin-top:20px;display:flex;justify-content:space-between;color:var(--muted);font-size:12px}
+@media (max-width:960px){.w{grid-template-columns:1fr 1fr}}
+</style>

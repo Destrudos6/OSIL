@@ -1,0 +1,14 @@
+---
+// Linear 式区块头 + 全宽手风琴列表
+import Section from '../ui/Section.astro';
+import FeatureHead from '../ui/FeatureHead.astro';
+import Accordion from '../ui/Accordion.astro';
+import { faq } from '../../data/home';
+---
+<Section id="faq" top={0}>
+  <FeatureHead title={faq.title} desc={faq.sub} />
+  <div class="rv">{faq.items.map((it) => <Accordion {...it} />)}</div>
+</Section>
+<style>
+.rv{margin-top:40px}
+</style>

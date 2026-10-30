@@ -1,0 +1,34 @@
+---
+// Linear 式区块头（左标题 + 右描述）+ 全宽流程图
+import Section from '../ui/Section.astro';
+import FeatureHead from '../ui/FeatureHead.astro';
+import { pipeline } from '../../data/home';
+---
+<Section top={0}>
+  <FeatureHead title={pipeline.title} desc={pipeline.desc} />
+  <div class="flow" data-inview>
+    <div class="bar"></div>
+    {pipeline.steps.map((s, i) => (
+      <div class="node" style={`--d:${i === 0 ? .1 : i * .7 + .1}s`}>
+        <span class:list={['o', { last: i === pipeline.steps.length - 1 }]}>{String(i + 1).padStart(2, '0')}</span>
+        <b>{s.title}</b><span set:html={s.desc} />
+      </div>
+    ))}
+  </div>
+</Section>
+<style>
+.flow{margin:80px auto 0;max-width:1100px;display:grid;grid-template-columns:repeat(5,1fr);position:relative}
+.flow:before{content:"";position:absolute;left:10%;right:10%;top:23px;height:1px;background:repeating-linear-gradient(90deg,var(--line) 0 6px,transparent 6px 12px)}
+.bar{position:absolute;left:10%;top:23px;height:1px;width:0;background:var(--blue);transition:width 3.2s cubic-bezier(.4,0,.2,1)}
+.flow:global(.in) .bar{width:80%}
+.node{position:relative;display:flex;flex-direction:column;align-items:center;gap:12px;padding:0 8px}
+.o{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;font-family:var(--mono);font-size:12px;color:var(--muted);transition:.4s;box-shadow:var(--shadow)}
+.flow:global(.in) .o{border-color:var(--blue);color:var(--blue);transition-delay:var(--d)}
+.flow:global(.in) .o.last{background:var(--blue);color:#fff}
+b{font-size:14px;font-weight:600}
+.node > span:last-child{font-size:12.5px;color:var(--muted);line-height:1.5}
+@media (max-width:640px){
+  .flow{grid-template-columns:1fr;gap:22px;max-width:320px}.flow:before,.bar{display:none}
+  .node{flex-direction:row;text-align:left;align-items:center}
+}
+</style>

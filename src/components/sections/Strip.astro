@@ -1,0 +1,15 @@
+---
+import Eyebrow from '../ui/Eyebrow.astro';
+import { strip } from '../../data/home';
+---
+<div class="strip w rv">
+  <div class="names">{strip.names.map((n) => <span>{n}</span>)}</div>
+  <Eyebrow dot={false}>{strip.eyebrow}</Eyebrow>
+</div>
+<style>
+.strip{padding:56px 0 24px;text-align:left}
+.names{display:flex;justify-content:space-between;gap:clamp(24px,5vw,64px);flex-wrap:wrap}
+.names span{font-size:19px;font-weight:550;color:color-mix(in srgb,var(--fg) 55%,transparent);transition:.2s;letter-spacing:-.02em}
+.names span:hover{color:var(--fg)}
+.strip :global(.eyebrow){display:inline-flex;margin-top:20px}
+</style>

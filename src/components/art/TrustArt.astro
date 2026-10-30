@@ -1,0 +1,18 @@
+---
+// 等距线框：阶梯面板 —— Trust & Eval（层层校验、逐步交付的隐喻）
+---
+<svg viewBox="0 0 400 300" fill="none" aria-hidden="true">
+  <g stroke="color-mix(in srgb,var(--fg) 42%,transparent)" stroke-width="1.25" stroke-linejoin="round">
+    <path d="M60 92 L86 80 L86 208 L60 220 Z"/>
+    <path d="M98 110 L124 98 L124 226 L98 238 Z"/>
+    <path d="M136 128 L162 116 L162 244 L136 256 Z"/>
+    <path d="M174 146 L200 134 L200 262 L174 274 Z"/>
+    <path d="M212 164 L238 152 L238 262 L212 274 Z"/>
+    <path d="M250 182 L276 170 L276 262 L250 274 Z"/>
+    <!-- 校验连线 -->
+    <path d="M86 80 L124 98 M124 98 L162 116 M162 116 L200 134 M200 134 L238 152 M238 152 L276 170" stroke-dasharray="2 4"/>
+  </g>
+  <!-- 蓝色点缀：通过校验的最后一步 -->
+  <path d="M288 190 L314 178 L314 262 L288 274 Z" stroke="var(--blue)" fill="var(--blue)" fill-opacity=".08"/>
+  <circle cx="301" cy="226" r="4.5" fill="var(--blue)"/>
+</svg>

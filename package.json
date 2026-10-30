@@ -1,0 +1,16 @@
+{
+  "name": "osil-site",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev --host",
+    "build": "astro build",
+    "preview": "astro preview --host"
+  },
+  "dependencies": {
+    "astro": "~7.4.4"
+  },
+  "allowScripts": {
+    "sharp@0.35.5": true
+  }
+}

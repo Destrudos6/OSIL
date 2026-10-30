@@ -1,0 +1,16 @@
+/* 设计变量：改这里即可统一调整全站颜色、字体、阴影 */
+:root{
+  --bg:#fbfbfa;--bg-soft:#f4f4f2;--card:#ffffff;--fg:#0b0b0c;--fg2:#3a3a3d;--muted:#76767c;--line:#e7e7e4;--line2:#efefec;
+  --blue:#2f80ff;--blue-soft:#e6eeff;--green:#16a34a;--amber:#d97706;
+  --serif:"Source Serif 4","Source Serif Pro","Noto Serif SC","Songti SC","STSong","Source Han Serif SC","SimSun",Georgia,serif;
+  --sans:"Geist","Inter",-apple-system,BlinkMacSystemFont,"PingFang SC","HarmonyOS Sans SC","Microsoft YaHei","Segoe UI",sans-serif;
+  --mono:"Geist Mono","JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px -8px rgba(0,0,0,.08);
+  --shadow-lg:0 1px 2px rgba(0,0,0,.04),0 30px 80px -20px rgba(20,30,60,.18);
+  --radius:16px;--radius-sm:10px;
+  --container:1160px;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#09090a;--bg-soft:#111113;--card:#121214;--fg:#f4f4f5;--fg2:#c9c9cf;--muted:#8a8a93;--line:#232327;--line2:#1b1b1e;--blue-soft:#05122e;
+  --shadow:0 1px 2px rgba(0,0,0,.4);--shadow-lg:0 30px 80px -20px rgba(0,0,0,.7);
+}}

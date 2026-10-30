@@ -1,0 +1,7 @@
+---
+// 区块外壳：统一容器宽度与上下间距
+interface Props { id?: string; class?: string; top?: number; bottom?: number }
+const { id, class: cls, top, bottom } = Astro.props;
+const style = [top !== undefined && `padding-top:${top}px`, bottom !== undefined && `padding-bottom:${bottom}px`].filter(Boolean).join(';');
+---
+<section id={id} class={cls} style={style || undefined}><div class="w"><slot /></div></section>

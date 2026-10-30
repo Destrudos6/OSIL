@@ -1,0 +1,32 @@
+---
+// 指标卡：给 count 时数字会从 0 滚动到目标值
+interface Props { label: string; count?: number; suffix?: string; value?: string; unit?: string; trend?: string }
+const { label, count, suffix = '', value, unit, trend } = Astro.props;
+---
+<div class="kpi">
+  <small>{label}</small>
+  {count !== undefined
+    ? <strong data-count={count} data-suf={suffix}>0</strong>
+    : <strong>{value}{unit && <span>{unit}</span>}</strong>}
+  {trend && <em>{trend}</em>}
+</div>
+<style>
+.kpi{border:1px solid var(--line);border-radius:10px;padding:11px 12px}
+small{font-size:11px;color:var(--muted);display:block}
+strong{font-size:20px;font-weight:600;letter-spacing:-.02em;display:block;margin-top:2px;font-variant-numeric:tabular-nums}
+strong span{font-size:13px;font-weight:500}
+em{font-style:normal;font-size:10.5px;color:var(--green);font-weight:500}
+</style>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-count]').forEach((el) => {
+    const t = +el.dataset.count!, s = el.dataset.suf || '';
+    let st: number | null = null;
+    const f = (ts: number) => {
+      st ??= ts;
+      const p = Math.min((ts - st) / 1400, 1), v = Math.round(t * (1 - Math.pow(1 - p, 3)));
+      el.textContent = v.toLocaleString() + s;
+      if (p < 1) requestAnimationFrame(f);
+    };
+    setTimeout(() => requestAnimationFrame(f), 500);
+  });
+</script>

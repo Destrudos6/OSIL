@@ -1,0 +1,28 @@
+---
+// Linear 式区块头 + 阶段列表
+import Section from '../ui/Section.astro';
+import FeatureHead from '../ui/FeatureHead.astro';
+import { roadmap as r } from '../../data/home';
+---
+<Section id="road" top={0}>
+  <FeatureHead eyebrow={r.eyebrow} title={r.title} desc={r.sub} />
+  <div class="steps">
+    {r.stages.map((s) => (
+      <div class:list={['step rv', { on: s.active }]}>
+        <span class="k">{s.key}</span>
+        <div><h4>{s.title}{s.badge && <span class="badge">{s.badge}</span>}</h4><p>{s.desc}</p></div>
+      </div>
+    ))}
+  </div>
+</Section>
+<style>
+.steps{display:flex;flex-direction:column;margin-top:64px}
+.step{display:grid;grid-template-columns:88px 1fr;gap:18px;padding:22px 0;border-top:1px solid var(--line)}
+.step:last-child{border-bottom:1px solid var(--line)}
+.k{font-family:var(--mono);font-size:12px;color:var(--muted);padding-top:3px}
+.on .k{color:var(--blue)}
+h4{font-family:var(--sans);font-weight:600;font-size:21px;line-height:1.25;letter-spacing:-.02em}
+p{font-size:14px;color:var(--muted);margin-top:6px}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;color:var(--blue);border:1px solid color-mix(in srgb,var(--blue) 35%,transparent);padding:1px 8px;border-radius:999px;margin-left:10px;vertical-align:4px;font-family:var(--sans)}
+@media (max-width:640px){.step{grid-template-columns:1fr;gap:6px}}
+</style>

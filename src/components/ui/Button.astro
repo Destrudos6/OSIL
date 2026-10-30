@@ -1,0 +1,16 @@
+---
+// 通用按钮：variant=dark|light，size=md|sm，arrow 显示右箭头
+interface Props { href: string; variant?: 'dark' | 'light'; size?: 'md' | 'sm'; arrow?: boolean }
+const { href, variant = 'dark', size = 'md', arrow = false } = Astro.props;
+---
+<a class:list={['btn', variant, size]} href={href}>
+  <slot />
+  {arrow && <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg>}
+</a>
+<style>
+.btn{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:999px;font-size:14px;font-weight:500;letter-spacing:.01em;transition:.2s}
+.sm{height:34px;padding:0 14px;font-size:13px}
+.dark{background:var(--fg);color:var(--bg)}.dark:hover{opacity:.86}
+.light{border:1px solid var(--line);background:var(--card)}.light:hover{border-color:var(--muted)}
+svg{width:14px;height:14px;transition:transform .2s}.btn:hover svg{transform:translateX(2px)}
+</style>

@@ -1,0 +1,26 @@
+---
+// 滚动日志：lines 为 [样式, 命令, 内容]
+interface Props { lines: readonly (readonly string[])[] }
+const { lines } = Astro.props;
+---
+<div class="log" data-log={JSON.stringify(lines)}></div>
+<style>
+.log{font-family:var(--mono);font-size:10.5px;line-height:1.7;background:var(--bg-soft);border:1px solid var(--line);border-radius:8px;padding:8px 10px;color:var(--fg2);height:74px;overflow:hidden;margin-top:8px}
+.log :global(.c){color:var(--muted)}.log :global(.ok){color:var(--green)}.log :global(.k){color:var(--blue)}
+.log :global(.cur:after){content:"▍";animation:blink 1s infinite;color:var(--blue)}
+</style>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-log]').forEach((el) => {
+    const lines: string[][] = JSON.parse(el.dataset.log!);
+    let i = 0;
+    const tick = () => {
+      el.innerHTML = lines.slice(Math.max(0, i - 3), i + 1).map((l, j, arr) => {
+        const cur = j === arr.length - 1 ? ' cur' : '';
+        return l[0] === 'c' ? `<div class="c${cur}">${l[1]}</div>` : `<div class="${cur.trim()}"><span class="${l[0] || 'c'}">${l[1]}</span>${l[2]}</div>`;
+      }).join('');
+      i = (i + 1) % lines.length;
+      setTimeout(tick, i === 0 ? 2600 : 1100);
+    };
+    tick();
+  });
+</script>

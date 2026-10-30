@@ -1,0 +1,18 @@
+---
+import Button from '../ui/Button.astro';
+import { finalCta as f } from '../../data/home';
+---
+<section class="final" id="join"><div class="w rv">
+  <h2 class="h2 serif" set:html={f.title} />
+  <p class="sub">{f.sub}</p>
+  <div class="cta">
+    <Button href={f.buttons.primary.href} arrow>{f.buttons.primary.label}</Button>
+    <Button href={f.buttons.secondary.href} variant="light">{f.buttons.secondary.label}</Button>
+  </div>
+</div></section>
+<style>
+.final{text-align:center;padding:120px 0 130px;border-top:1px solid var(--line);background:radial-gradient(50% 70% at 50% 0%,color-mix(in srgb,var(--blue) 10%,transparent),transparent)}
+h2{font-size:clamp(44px,6vw,72px);max-width:880px;margin:0 auto;letter-spacing:-.035em}
+.sub{margin:18px auto 0;text-align:center}
+.cta{display:flex;gap:10px;justify-content:center;margin-top:30px}
+</style>

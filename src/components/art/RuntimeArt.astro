@@ -1,0 +1,21 @@
+---
+// 等距线框：层叠板 —— Agent Runtime（分层架构的隐喻）
+// Linear 风格：单色细线线稿 + 一处蓝色点缀
+---
+<svg viewBox="0 0 400 300" fill="none" aria-hidden="true">
+  <g stroke="color-mix(in srgb,var(--fg) 42%,transparent)" stroke-width="1.25" stroke-linejoin="round">
+    <!-- 顶板 -->
+    <path d="M70 100 L200 68 L330 100 L200 132 Z"/>
+    <path d="M70 100 V116 M330 100 V116 M70 116 L200 148 L330 116"/>
+    <!-- 中板 -->
+    <path d="M70 145 L200 113 L330 145 L200 177 Z"/>
+    <path d="M70 145 V161 M330 145 V161 M70 161 L200 193 L330 161"/>
+    <!-- 底板 -->
+    <path d="M70 190 L200 158 L330 190 L200 222 Z"/>
+    <path d="M70 190 V206 M330 190 V206 M70 206 L200 238 L330 206"/>
+    <!-- 穿层虚线：数据流 -->
+    <path d="M200 68 V238" stroke-dasharray="2 5"/>
+  </g>
+  <circle cx="200" cy="100" r="5" fill="var(--blue)"/>
+  <circle cx="200" cy="100" r="10" stroke="var(--blue)" stroke-opacity=".35" stroke-width="1.25"/>
+</svg>

@@ -1,0 +1,53 @@
+---
+// Linear 式 Statement（大字双色段落）+ 窗口框产品 mock
+import Section from '../ui/Section.astro';
+import { compare as c } from '../../data/home';
+---
+<Section id="why" top={0}>
+  <div class="statement rv">
+    <h2 class="h2 serif" set:html={c.title} />
+  </div>
+  <div class="cmp">
+    <div class="win rv">
+      <div class="wbar"><span class="dots"><i></i><i></i><i></i></span><span class="wt">{c.chat.label}</span></div>
+      <div class="wb">
+        <div class="bubble me">{c.prompt}</div>
+        {c.chat.replies.map((r) => <div class="bubble">{r}</div>)}
+        <div class="bubble dim">{c.chat.after}</div>
+      </div>
+    </div>
+    <div class="win us rv">
+      <div class="wbar"><span class="dots"><i></i><i></i><i></i></span><span class="wt">{c.agent.label}</span></div>
+      <div class="wb">
+        <div class="bubble me">{c.prompt}</div>
+        {c.agent.replies.map((r) => <div class="bubble">{r}</div>)}
+        <div class="files">{c.agent.files.map((f) => <span>{f}</span>)}</div>
+      </div>
+    </div>
+  </div>
+</Section>
+<style>
+/* Statement：前半段灰、加粗的后半段亮 */
+.statement h2{font-size:clamp(34px,4.5vw,52px);line-height:1.15;max-width:980px;color:var(--muted)}
+.statement h2 :global(b){color:var(--fg)}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:72px}
+.win{border:1px solid var(--line);border-radius:var(--radius);background:var(--card);overflow:hidden;transition:.25s}
+.win:hover{box-shadow:var(--shadow-lg)}
+.win.us{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.wbar{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--line)}
+.us .wbar{border-bottom-color:color-mix(in srgb,var(--bg) 14%,transparent)}
+.dots{display:flex;gap:5px}
+.dots i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.us .dots i{background:color-mix(in srgb,var(--bg) 18%,transparent)}
+.wt{font-size:12px;color:var(--muted)}
+.us .wt{color:color-mix(in srgb,var(--bg) 60%,transparent)}
+.wb{padding:22px}
+.bubble{font-size:14px;padding:12px 14px;border-radius:12px;background:var(--bg-soft);margin-bottom:10px;line-height:1.6}
+.us .bubble{background:color-mix(in srgb,var(--bg) 9%,transparent)}
+.bubble.me{margin-left:auto;max-width:78%;background:var(--blue);color:#fff}
+.dim{opacity:.6}
+.files{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.files span{font-family:var(--mono);font-size:11.5px;border:1px solid color-mix(in srgb,var(--bg) 22%,transparent);border-radius:7px;padding:5px 9px}
+.files span:before{content:"↧ ";color:var(--blue)}
+@media (max-width:960px){.cmp{grid-template-columns:1fr;gap:36px}}
+</style>

@@ -1,0 +1,10 @@
+---
+// 小标签：Linear 式 mono 大写微文案，dot 显示蓝点
+interface Props { dot?: boolean }
+const { dot = true } = Astro.props;
+---
+<span class="eyebrow">{dot && <i></i>}<slot /></span>
+<style>
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+i{width:5px;height:5px;border-radius:50%;background:var(--blue)}
+</style>

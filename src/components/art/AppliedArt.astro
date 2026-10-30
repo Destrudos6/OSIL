@@ -1,0 +1,25 @@
+---
+// 等距线框：立方体群 —— Applied Agents（多智能体协作的隐喻）
+---
+<svg viewBox="0 0 400 300" fill="none" aria-hidden="true">
+  <g stroke="color-mix(in srgb,var(--fg) 42%,transparent)" stroke-width="1.25" stroke-linejoin="round">
+    <!-- 大立方体 -->
+    <path d="M170 78 L225 105 L170 132 L115 105 Z"/>
+    <path d="M115 105 L170 132 L170 182 L115 155 Z"/>
+    <path d="M225 105 L170 132 L170 182 L225 155 Z"/>
+    <!-- 右上立方体 -->
+    <path d="M280 62 L322 83 L280 104 L238 83 Z"/>
+    <path d="M238 83 L280 104 L280 142 L238 121 Z"/>
+    <path d="M322 83 L280 104 L280 142 L322 121 Z"/>
+    <!-- 前方小立方体 -->
+    <path d="M245 178 L277 194 L245 210 L213 194 Z"/>
+    <path d="M213 194 L245 210 L245 242 L213 226 Z"/>
+    <path d="M277 194 L245 210 L245 242 L277 226 Z"/>
+    <!-- 连接线：Agent 间的协作 -->
+    <path d="M225 105 L238 83" stroke-dasharray="2 4"/>
+    <path d="M225 155 L245 194" stroke-dasharray="2 4"/>
+  </g>
+  <!-- 蓝色点缀：主 Agent -->
+  <circle cx="170" cy="105" r="5" fill="var(--blue)"/>
+  <path d="M170 78 L225 105 L170 132 L115 105 Z" fill="var(--blue)" fill-opacity=".06"/>
+</svg>

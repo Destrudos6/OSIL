@@ -1,0 +1,40 @@
+---
+import Brand from '../ui/Brand.astro';
+import Button from '../ui/Button.astro';
+import { nav } from '../../data/site';
+---
+<header class="nav" id="nav"><div class="w">
+  <Brand />
+  <nav>{nav.links.map((l) => <a href={l.href}>{l.label}</a>)}</nav>
+  <div class="r"><Button href={nav.cta.href} size="sm">{nav.cta.label}</Button></div>
+</div></header>
+<style>
+/* 外层固定 60px 高度并居中子项：胶囊在内部收缩，不会顶动下方内容 */
+header{position:sticky;top:0;z-index:50;height:60px;display:flex;align-items:center}
+/* 顶部状态：通栏、无边框、无阴影 */
+.w{width:100%;max-width:var(--container);margin:0 auto;padding:0 24px;height:60px;display:flex;align-items:center;gap:32px;
+  border:1px solid transparent;border-radius:999px;background:color-mix(in srgb,var(--bg) 82%,transparent);
+  backdrop-filter:saturate(1.4) blur(12px);
+  transition:max-width .45s cubic-bezier(.2,.7,.2,1),height .45s cubic-bezier(.2,.7,.2,1),padding .45s cubic-bezier(.2,.7,.2,1),background .35s ease,border-color .35s ease,box-shadow .35s ease}
+/* 滚动后：收缩为悬浮胶囊，毛玻璃 + 描边 + 投影 */
+header.s .w{max-width:min(860px,calc(100% - 20px));height:48px;padding:0 10px 0 18px;
+  background:color-mix(in srgb,var(--card) 72%,transparent);border-color:var(--line);box-shadow:var(--shadow)}
+/* 胶囊内部元素随尺寸微调，避免显得空旷 */
+header.s nav{font-size:12.5px}
+header.s .r{gap:6px}
+nav{display:flex;gap:4px;font-size:13px;font-weight:500;transition:font-size .45s cubic-bezier(.2,.7,.2,1)}
+nav a{padding:7px 12px;border-radius:8px;color:var(--fg2)}
+nav a:hover{background:var(--bg-soft);color:var(--fg)}
+.r{margin-left:auto;display:flex;gap:8px;align-items:center;transition:gap .45s cubic-bezier(.2,.7,.2,1)}
+@media (max-width:640px){nav{display:none}}
+@media (prefers-reduced-motion:reduce){
+  .w,nav,.r{transition:none}
+}
+</style>
+<script>
+  const nav = document.getElementById('nav')!;
+  // 超过 24px 才切换，避开顶部临界抖动；passive 不阻塞滚动
+  const sync = () => nav.classList.toggle('s', scrollY > 24);
+  sync(); // 处理刷新时已处于滚动位置的情况
+  addEventListener('scroll', sync, { passive: true });
+</script>

@@ -1,0 +1,30 @@
+---
+// 首页：只负责按顺序拼装区块。调整顺序、删减区块都在这里。
+import Base from '../layouts/Base.astro';
+import Nav from '../components/sections/Nav.astro';
+import Hero from '../components/sections/Hero.astro';
+import Strip from '../components/sections/Strip.astro';
+import Pipeline from '../components/sections/Pipeline.astro';
+import Directions from '../components/sections/Directions.astro';
+import Compare from '../components/sections/Compare.astro';
+import Letters from '../components/sections/Letters.astro';
+import Roadmap from '../components/sections/Roadmap.astro';
+import Faq from '../components/sections/Faq.astro';
+import FinalCta from '../components/sections/FinalCta.astro';
+import Footer from '../components/sections/Footer.astro';
+---
+<Base>
+  <Nav />
+  <main>
+    <Hero />
+    <Strip />
+    <Pipeline />
+    <Directions />
+    <Compare />
+    <Letters />
+    <Roadmap />
+    <Faq />
+    <FinalCta />
+  </main>
+  <Footer />
+</Base>
